@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"    "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.mini.cms.admin.dao.mapper.basic.ResourcesDao">
+	<cache/>
+	<insert id="insert" parameterType="com.mini.cms.admin.dao.entity.basic.ResourcesEty" useGeneratedKeys="true" keyProperty="id">
+ 		insert into resource(
+ 			<if test="menuName != null"> menuName,</if> 
+ 			<if test="parantNodeID != null"> parantNodeID,</if>
+ 			<if test="icon != null"> icon,</if>
+ 			<if test="openIcon != null"> openIcon,</if>
+ 			<if test="actionPath != null"> actionPath,</if>
+ 			<if test="menuOrder != null"> menuOrder,</if>
+ 			<if test="isValiDate != null"> isValiDate,</if>
+ 			<if test="jsClassFile != null"> jsClassFile,</if>
+ 			<if test="type != null"> type,</if>
+ 			<if test="namespace != null"> namespace,</if>
+ 			<if test="mainClass != null"> mainClass,</if>
+			nodeId
+		) values (
+			<if test="menuName != null"> #{menuName},</if> 
+ 			<if test="parantNodeID != null"> #{parantNodeID},</if>
+ 			<if test="icon != null"> #{icon},</if>
+ 			<if test="openIcon != null"> #{openIcon},</if>
+ 			<if test="actionPath != null"> #{actionPath},</if>
+ 			<if test="menuOrder != null"> #{menuOrder},</if>
+ 			<if test="isValiDate != null"> #{isValiDate},</if>
+ 			<if test="jsClassFile != null"> #{jsClassFile},</if>
+ 			<if test="type != null"> #{type},</if>
+ 			<if test="namespace != null"> #{namespace},</if>
+ 			<if test="mainClass != null"> #{mainClass},</if>
+			#{nodeId}
+		)
+	</insert>
+
+	<select id="selectByEntity" parameterType="com.mini.cms.admin.dao.entity.basic.ResourcesEty" resultType="com.mini.cms.admin.dao.entity.basic.ResourcesEty">
+ 		SELECT *  FROM resourcecrm_stat_menu=1 
+ 		<if test="id != null"> and id = #{id}</if> 
+ 		<if test="nodeId != null"> and nodeId = #{nodeId}</if> 
+ 		<if test="menuName != null"> and menuName = #{menuName}</if> 
+ 		<if test="parantNodeID != null"> and parantNodeID = #{parantNodeID}</if> 
+ 		<if test="icon != null"> and icon = #{icon}</if>
+ 		<if test="openIcon != null"> and openIcon = #{openIcon}</if> 
+ 		<if test="actionPath != null"> and actionPath = #{actionPath}</if> 
+ 		<if test="menuOrder != null"> and menuOrder = #{menuOrder}</if> 
+ 		<if test="isValiDate != null"> and isValiDate = #{isValiDate}</if> 
+ 		<if test="description != null"> and description = #{description}</if> 
+ 		<if test="jsClassFile != null"> and jsClassFile = #{jsClassFile}</if> 
+ 		<if test="type != null"> and type = #{type}</if> 
+ 		<if test="namespace != null"> and namespace = #{namespace}</if> 
+	</select>
+
+	<update id="updateById" parameterType="com.mini.cms.admin.dao.entity.basic.ResourcesEty">
+ 		UPDATE resource SET 
+ 		<if test="id != null"> id = #{id},</if> 
+ 		<if test="nodeId != null"> nodeId = #{nodeId},</if> 
+ 		<if test="menuName != null"> menuName = #{menuName},</if> 
+ 		<if test="parantNodeID != null"> parantNodeID = #{parantNodeID},</if> 
+ 		<if test="icon != null"> icon = #{icon},</if>
+ 		<if test="openIcon != null"> openIcon = #{openIcon},</if> 
+ 		<if test="actionPath != null"> actionPath = #{actionPath},</if> 
+ 		<if test="menuOrder != null"> menuOrder = #{menuOrder},</if> 
+ 		<if test="isValiDate != null"> isValiDate = #{isValiDate},</if> 
+ 		<if test="description != null"> description = #{description},</if> 
+ 		<if test="jsClassFile != null"> jsClassFile = #{jsClassFile},</if> 
+ 		<if test="type != null"> type = #{type},</if> 
+ 		<if test="namespace != null"> namespace = #{namespace},</if> 
+ 		<if test="mainClass != null"> mainClass = #{mainClass},</if>
+		 id=#{id}
+		WHERE
+		 id=#{id}
+	</update>
+
+	<delete id="deleteById" parameterType="java.lang.Integer">
+ 		DELETE FROM resource WHERE id=#{id}
+	</delete>
+	
+	<select id="selectById" parameterType="java.lang.Integer" resultType="com.mini.cms.admin.dao.entity.basic.ResourcesEty">
+		select * from resource WHERE id=#{id}
+	</select>
+
+	<select id="selectLimitCount" parameterType="com.mini.cms.admin.dao.entity.basic.ResourcesEty" resultType="java.lang.Integer">
+ 		SELECT count(1) FROM resource WHERE 1=1 
+ 		<if test="menuName != null and !menuName.toString().equalsIgnoreCase('0')"> and 2=2 </if>
+		<if test="id != null"> and id = #{id}</if> 
+ 		<if test="nodeId != null "> and nodeId = #{nodeId}</if> 
+ 		<if test="menuName != null and menuName!='' "> and menuName = #{menuName}</if> 
+ 		<if test="parantNodeID != null "> and parantNodeID = #{parantNodeID}</if> 
+ 		<if test="icon != null and icon != ''"> and icon = #{icon}</if>
+ 		<if test="openIcon != null and openIcon != '' "> and openIcon = #{openIcon}</if> 
+ 		<if test="actionPath != null and actionPath != '' "> and actionPath = #{actionPath}</if> 
+ 		<if test="menuOrder != null "> and menuOrder = #{menuOrder}</if> 
+ 		<if test="isValiDate != null and isValiDate != '' "> and isValiDate = #{isValiDate}</if> 
+ 		<if test="description != null and description != '' " > and description = #{description}</if> 
+ 		<if test="jsClassFile != null and jsClassFile != '' "> and jsClassFile = #{jsClassFile}</if> 
+	</select>
+
+	<select id="selectByLimit" parameterType="com.mini.cms.admin.dao.entity.basic.ResourcesEty" resultType="com.mini.cms.admin.dao.entity.basic.ResourcesEty">
+ 		SELECT id,nodeId,menuName,parantNodeID,icon,openIcon,actionPath,menuOrder,isValiDate,description,jsClassFile 
+		FROM resource
+		WHERE 1=1 
+		<if test="menuName != '0'"> and 2=2 </if>
+		<if test="id != null"> and id = #{id}</if> 
+ 		<if test="nodeId != null "> and nodeId = #{nodeId}</if> 
+ 		<if test="menuName != null and menuName!='' "> and menuName = #{menuName}</if> 
+ 		<if test="parantNodeID != null "> and parantNodeID = #{parantNodeID}</if> 
+ 		<if test="icon != null and icon != ''"> and icon = #{icon}</if>
+ 		<if test="openIcon != null and openIcon != '' "> and openIcon = #{openIcon}</if> 
+ 		<if test="actionPath != null and actionPath != '' "> and actionPath = #{actionPath}</if> 
+ 		<if test="menuOrder != null "> and menuOrder = #{menuOrder}</if> 
+ 		<if test="isValiDate != null and isValiDate != '' "> and isValiDate = #{isValiDate}</if> 
+ 		<if test="description != null and description != '' " > and description = #{description}</if> 
+ 		<if test="jsClassFile != null and jsClassFile != '' "> and jsClassFile = #{jsClassFile}</if> 
+ 		<if test="extLimitSort == null">order by nodeId, menuOrder</if>
+ 		<if test="extLimitSort != null">order by ${extLimitSort} ${extLimitDir}</if>
+ 		<if test="extLimitLimit != null">limit ${extLimitStart}, ${extLimitLimit}</if>
+	</select>
+</mapper>

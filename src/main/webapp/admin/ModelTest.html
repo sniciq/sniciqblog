@@ -1,0 +1,54 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="pragma" content="no-cache" />
+		<title>调试模块</title>
+		<link rel="stylesheet" type="text/css" href="../ExtJS/resources/css/ext-all.css"/>
+		<script type="text/javascript" src="../ExtJS/adapter/ext/ext-base.js"></script>
+		<script type="text/javascript" src="../ExtJS/ext-all.js"></script>
+		<script type="text/javascript" src="../ExtJS/src/locale/ext-lang-zh_CN.js"></script>
+		
+		<script type="text/javascript" src="../ExtJS/examples/ux/treegrid/TreeGridSorter.js"></script> 
+        <script type="text/javascript" src="../ExtJS/examples/ux/treegrid/TreeGridColumnResizer.js"></script> 
+        <script type="text/javascript" src="../ExtJS/examples/ux/treegrid/TreeGridNodeUI.js"></script> 
+        <script type="text/javascript" src="../ExtJS/examples/ux/treegrid/TreeGridLoader.js"></script> 
+        <script type="text/javascript" src="../ExtJS/examples/ux/treegrid/TreeGridColumns.js"></script> 
+        <script type="text/javascript" src="../ExtJS/examples/ux/treegrid/TreeGrid.js"></script> 
+        
+        <link rel="stylesheet" type="text/css" title="blue" href="../ExtJS/resources/css/xtheme-blue.css" />
+		<link rel="stylesheet" type="text/css" title="vistablack" href="../ExtJS/resources/css/xtheme-vistablack/css/xtheme-vistablack.css" />
+		<link rel="stylesheet" type="text/css" title="gray" href="../ExtJS/resources/css/xtheme-gray.css" />
+		<link rel="stylesheet" type="text/css" title="tp" href="../ExtJS/resources/css/xtheme-tp.css" />
+		<link rel="stylesheet" type="text/css" title="indigo" href="../ExtJS/resources/css/xtheme-indigo.css" />
+		<link rel="stylesheet" type="text/css" title="pink" href="../ExtJS/resources/css/xtheme-pink.css" />
+		
+		<!-- 验证及导出等JS -->
+		<script type="text/javascript" src="js/core/gridToExcel.js"></script>
+		<script type="text/javascript" src="js/ValidateSession.js"></script>
+		<script type="text/javascript" src="js/CookieTheme.js"></script>
+		<script type="text/javascript" src="js/core/CommonRenderer.js"></script>
+		<script type="text/javascript" src="js/core/export.js"></script>
+		
+		<link rel="stylesheet" type="text/css" href="css/buttons.css"/>
+		<link rel="stylesheet" type="text/css" href="css/menu.css"/>
+		
+		<script type="text/javascript" src="category/ContentItemPanel.js"></script>
+		
+		
+		<script type="text/javascript">
+			Ext.BLANK_IMAGE_URL = '../ExtJS/resources/images/default/s.gif';
+			Ext.onReady(function() {
+				myApp = {};
+				myApp.ctx = '/MiNiCMS';
+				var panel = new com.mini.cms.admin.category.ContentItemPanel();
+				var viewport = new Ext.Viewport({
+					layout: 'fit',
+					items: [panel]
+				});
+				panel.initMethod();
+			});
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

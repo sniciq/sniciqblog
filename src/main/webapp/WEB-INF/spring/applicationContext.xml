@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:tx="http://www.springframework.org/schema/tx" 
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.1.xsd        
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-3.1.xsd        
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+	
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+		<property name="url" value="jdbc:mysql://127.0.0.1:3306/sniciqblog?useUnicode=true&amp;characterEncoding=utf-8"/>
+		<property name="username" value="root"/>
+		<property name="password" value="123456"/>
+		<property name="maxActive" value="10"/>
+		<property name="initialSize" value="5"/>
+		<property name="maxIdle" value="5"/>
+		<property name="maxWait" value="30"/>
+		<property name="validationQuery" value="select now()"/>
+	</bean>
+		
+	<!--
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+		<property name="url" value="jdbc:mysql://mysql://$OPENSHIFT_MYSQL_DB_HOST:$OPENSHIFT_MYSQL_DB_PORT//sniciq?useUnicode=true&amp;characterEncoding=utf-8"/>
+		<property name="username" value="adminkBXlssn"/>
+		<property name="password" value="peHr1ZwPB3sm"/>
+		<property name="maxActive" value="10"/>
+		<property name="initialSize" value="5"/>
+		<property name="maxIdle" value="5"/>
+		<property name="maxWait" value="30"/>
+		<property name="validationQuery" value="select now()"/>
+	</bean>
+	-->
+	 
+	 <!--
+	 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+			<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+			<property name="url" value="jdbc:mysql://127.0.0.1:3306/sniciqblog?useUnicode=true&amp;characterEncoding=utf-8"/>
+			<property name="username" value="root"/>
+			<property name="password" value="123456"/>
+			<property name="maxActive" value="10"/>
+			<property name="initialSize" value="5"/>
+			<property name="maxIdle" value="5"/>
+			<property name="maxWait" value="30"/>
+			<property name="validationQuery" value="select now()"/>
+		</bean>
+	 -->
+	 
+	 <!--
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://sqld.duapp.com:4050/zjJjXvUNCxGLeWNxFWPJ?useUnicode=true&amp;characterEncoding=utf-8" />
+		<property name="username" value="AChcoGOx4PfOXccubu357Ca3" />
+		<property name="password" value="K0uOy9zfvnYZPLDuIsnErx7B8iRhUXMC" />
+	</bean>
+	-->
+	
+	<bean id="myApplicationContextUtils" class="com.mini.cms.springutil.MyApplicationContextUtil"></bean> 
+	 
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="configLocation" value="WEB-INF/mybatis/config-mappers.xml"></property>
+	</bean>
+	 
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+		<property name="basePackage" value="com.mini.cms.admin.dao.mapper"></property>
+	</bean>
+	
+	<bean id="BaseSql" class="com.mini.cms.admin.dao.basic.BaseSql" depends-on="sqlSessionFactory" init-method="build">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+		<property name="configLocation" value="classpath:temp/tmpconfig-mappers.xml"></property>
+	</bean>
+	
+	<context:component-scan base-package="com.mini.cms.admin.services"></context:component-scan>
+</beans>	

@@ -1,0 +1,29 @@
+<div class="container">
+	<div class="starter-template">
+      <p class="lead">
+      	夫君子之行，静以修身，俭以养德。非淡泊无以明志，非宁静无以致远。夫学须静也，才须学也，非学无以广才，非志无以成学。淫慢则不能励精，险躁则不能治性。年与时驰，意与日去，遂成枯落，多不接世，悲守穷庐，将复何及！
+      </p>
+    </div>
+      
+	<div class="row">
+		<div class="col-md-3">
+			<div ng-repeat="side in sideList">
+				<div class="side_header">
+					<div class="caption">{{side.name}}</div>
+					<div class="extend"><a href="#/list/{{side.id}}">更多</a></div>
+				</div>
+				<div>
+					<table class="table">
+						<tr ng-repeat="item in side.items">
+							<td><a href="#/detail/{{item.id}}">{{item.name}}</a></td>
+							<td style="width:90px;">{{item.createDate}}</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-9">
+		 	aaa
+		</div>
+	</div>
+</div>

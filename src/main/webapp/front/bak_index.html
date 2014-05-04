@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="no-cache">
+		<meta http-equiv="Expires" content="-1">
+		<meta http-equiv="Cache-Control" content="no-cache">
+		
+		<link rel="stylesheet" type="text/css" href="main.css"/>
+		
+		<script type="text/javascript" src="../js/jquery/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" src="../js/jquery/jquery.tmpl.min.js"></script>
+		<script type="text/javascript" src="../js/jqpagination/js/jquery.jqpagination.min.js"></script>
+		<script type="text/javascript" src="global.js"></script>
+		<script type="text/javascript" src="../js/param.js"></script>
+		
+		<link type="text/css" href="menu/menu.css" rel="stylesheet" />
+	    
+	    
+		<script type="text/javascript">
+			var $j = jQuery.noConflict();
+			$j(function() {
+				createSide("9,1,7,8");
+				
+				$j(".menu>li").removeClass("active");
+				$j($j(".menu>li")[0]).addClass("active");
+			});
+		</script>
+	</head>
+	<body>
+		<div id="header">
+			<div class="headerlogo">
+				<div id="webName">天空网</div>
+				<div id="menu">
+				    <ul class="menu">
+				    </ul>
+				</div>
+			</div>
+		</div>
+		
+		<div id="container">
+			<div id="side">正在加载...</div>
+			<div id=content>
+				<div>
+					<h1 style="text-align: center;"><strong>欢迎访问我的个人网站</strong></h1>
+				</div>
+			</div>
+		</div>
+		
+		<div id="pagefooter"></div>
+	</body>
+</html>

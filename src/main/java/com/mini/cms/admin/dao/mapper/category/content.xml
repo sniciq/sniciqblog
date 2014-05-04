@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper    PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"    "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.mini.cms.admin.dao.mapper.category.ContentDao">
+
+	<cache/>
+
+	<insert id="insert" parameterType="com.mini.cms.admin.dao.entity.category.ContentEty">
+		insert into content(
+			id,name,groupId,displayTypeId,remark,createDate)
+		values (
+			#{id},#{name},#{groupId},#{displayTypeId},#{remark},#{createDate}
+		)
+	</insert>
+
+	<select id="selectByEntity" parameterType="com.mini.cms.admin.dao.entity.category.ContentEty" resultType="com.mini.cms.admin.dao.entity.category.ContentEty">
+		SELECT * from content
+		WHERE 1=1 
+		<if test="id != null "> AND id=#{id}</if>
+		<if test="name != null  and name != ''"> AND name=#{name}</if>
+		<if test="groupId != null "> AND groupId=#{groupId}</if>
+		<if test="displayTypeId != null "> AND displayTypeId=#{displayTypeId}</if>
+		<if test="remark != null  and remark != ''"> AND remark=#{remark}</if>
+	</select>
+
+	<update id="updateById" parameterType="com.mini.cms.admin.dao.entity.category.ContentEty">
+		UPDATE content SET
+		<if test="id != null">id=#{id},</if>
+		<if test="name != null">name=#{name},</if>
+		<if test="groupId != null">groupId=#{groupId},</if>
+		<if test="displayTypeId != null">displayTypeId=#{displayTypeId},</if>
+		<if test="remark != null">remark=#{remark},</if>
+		 id=#{id}
+		WHERE
+		 id=#{id}
+	</update>
+
+	<select id="selectById" parameterType="int" resultType="com.mini.cms.admin.dao.entity.category.ContentEty">
+		select * from content where id=#{id}
+	</select>
+
+	<delete id="deleteById" parameterType="int">
+		DELETE FROM content WHERE id=#{id}
+	</delete>
+
+	<select id="selectLimitCount" parameterType="com.mini.cms.admin.dao.entity.category.ContentEty" resultType="java.lang.Integer">
+		SELECT count(1) from content
+		WHERE 1=1 
+		<if test="id != null "> AND id=#{id}</if>
+		<if test="name != null  and name != ''"> AND name=#{name}</if>
+		<if test="groupId != null "> AND groupId=#{groupId}</if>
+		<if test="displayTypeId != null "> AND displayTypeId=#{displayTypeId}</if>
+		<if test="remark != null  and remark != ''"> AND remark=#{remark}</if>
+	</select>
+
+	<select id="selectByLimit" parameterType="com.mini.cms.admin.dao.entity.category.ContentEty" resultType="com.mini.cms.admin.dao.entity.category.ContentEty">
+		SELECT * from content
+		WHERE 1=1 
+		<if test="id != null "> AND id=#{id}</if>
+		<if test="name != null  and name != ''"> AND name=#{name}</if>
+		<if test="groupId != null "> AND groupId=#{groupId}</if>
+		<if test="displayTypeId != null "> AND displayTypeId=#{displayTypeId}</if>
+		<if test="remark != null  and remark != ''"> AND remark=#{remark}</if>
+		<if test="extLimitSort == null">order by createDate desc</if>
+		<if test="extLimitSort != null">order by ${extLimitSort} ${extLimitDir}</if>
+		<if test="extLimitLimit != null"> limit ${extLimitStart}, ${extLimitLimit}</if>
+	</select>
+</mapper>

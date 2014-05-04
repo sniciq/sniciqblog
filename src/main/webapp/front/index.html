@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="no-cache">
+	<meta http-equiv="Expires" content="-1">
+	<meta http-equiv="Cache-Control" content="no-cache">
+	
+	<title>无我仙人的个人网站</title>
+
+    <link rel="stylesheet" type="text/css" href="../bootstrap/2.0/css/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="../bootstrap/2.0/css/bootstrap-responsive.min.css"/>
+	
+	<link rel="stylesheet" type="text/css" href="main.css"/>
+	
+    <style type="text/css">
+		body {
+		  padding-top: 60px;
+		  padding-bottom: 40px;
+		}
+		a {
+			color: #222;
+		}
+      	.pagination {
+			float: right;
+			height: 30px;
+		}
+		
+		#dataTable {
+			border: 0px solid #FF0000;
+			border-collapse: separate;
+		}
+		#dataTable tr{
+			height: 30px;
+			display: table-row;
+		}
+    </style>
+	
+	<script type="text/javascript" src="../js/jquery/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="../js/jquery/jquery.tmpl.min.js"></script>
+	<script type="text/javascript" src="global.js"></script>
+	<script type="text/javascript" src="../js/param.js"></script>
+	
+	<script type="text/javascript">
+		var $j = jQuery.noConflict();
+		$j(function() {
+			createDefauleSide();
+		});
+	</script>
+  </head>
+
+  <body>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">无我仙人的个人网站</a>
+          <div class="nav-collapse">
+          	<ul class="nav" id="menu"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="hero-unit">
+        <h2>你好, 欢迎来到我的网站！</h2>
+        <p>提供J2EE、EXTJS、JS、android、数据库等软件及服务，联系方式：sniciq@gmail.com</p>
+      </div>
+
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="span4">
+          <div id="side">正在加载...</div>
+        </div>
+        
+        <div class="span8">
+          <h2>你好</h2>
+           <p>本人具有多年开发经验，曾经从事于党政机关电子公文、互联网等行业，精通JAVA、WEB、JS前端、EXTJS、数据库、android等技术，本人为人谦和，性格开朗，愿结交天下朋友!</p>
+       </div>
+        
+      </div>
+
+      <hr>
+
+      <footer>
+        <div id="pagefooter"></div>
+      </footer>
+
+    </div>
+  </body>
+</html>

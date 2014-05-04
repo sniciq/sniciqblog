@@ -1,0 +1,54 @@
+.default_menu {
+	background-image: url(../images/tabs.gif ) !important;
+}
+
+.allResource {
+	background-image: url(../images/allResource.png ) !important;
+}
+.customer {
+	background-image: url(../images/customer.png ) !important;
+}
+
+.industry {
+	background-image: url(../images/industry.png ) !important;
+}
+
+.contract {
+	background-image: url(../images/contract.png ) !important;
+}
+
+.achievement {
+	background-image: url(../images/achievement.png ) !important;
+}
+
+.adresources {
+	background-image: url(../images/adresources.png ) !important;
+}
+
+.page {
+	background-image: url(../images/page.png ) !important;
+}
+
+.systemControl {
+	background-image: url(../images/systemControl.png) !important;
+}
+
+.indexIcon {
+	background-image: url(../images/home.png ) !important;
+}
+
+.syslog {
+	background-image: url(../images/windows.png ) !important;
+}
+
+.logout {
+	background-image: url(../images/logout.png ) !important;
+}
+
+.achievement-folder {
+	background-image: url(../images/folder_go.gif) !important;
+}
+
+.achievement-leaf {
+	background-image: url(../images/cog.gif) !important;
+}

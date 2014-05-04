@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper    PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"    "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.mini.cms.admin.dao.mapper.basic.RoleDao">
+	<cache/>
+	<insert id="insert" parameterType="com.mini.cms.admin.dao.entity.basic.RoleEty">
+		insert into role(id,roleName,roleAuth,describle) values (#{id},#{roleName},#{roleAuth},#{describle})
+	</insert>
+
+	<select id="selectByEntity" parameterType="com.mini.cms.admin.dao.entity.basic.RoleEty" resultType="com.mini.cms.admin.dao.entity.basic.RoleEty">
+		SELECT * from role
+		WHERE 1=1 
+		<if test="id != null "> AND id=#{id}</if>
+		<if test="roleName != null  and roleName != ''"> AND roleName=#{roleName}</if>
+		<if test="roleAuth != null  and roleAuth != ''"> AND roleAuth=#{roleAuth}</if>
+		<if test="describle != null  and describle != ''"> AND describle=#{describle}</if>
+	</select>
+
+	<update id="updateById" parameterType="com.mini.cms.admin.dao.entity.basic.RoleEty">
+		UPDATE role SET
+		<if test="id != null"> id=#{id},</if>
+		<if test="roleName != null">roleName=#{roleName},</if>
+		<if test="roleAuth != null">roleAuth=#{roleAuth},</if>
+		<if test="describle != null"> describle=#{describle},</if>
+		 id=#{id}
+		WHERE
+		 id=#{id}
+	</update>
+	
+	<select id="selectById" parameterType="int" resultType="com.mini.cms.admin.dao.entity.basic.RoleEty">
+		select * from role where id=#{id}
+	</select>
+
+	<delete id="deleteById" parameterType="int">
+		DELETE FROM role WHERE id=#{id}
+	</delete>
+
+	<select id="selectLimitCount" parameterType="com.mini.cms.admin.dao.entity.basic.RoleEty" resultType="java.lang.Integer">
+		SELECT count(1) from role
+		WHERE 1=1 
+		<if test="id != null "> AND id=#{id}</if>
+		<if test="roleName != null  and roleName != ''"> AND roleName=#{roleName}</if>
+		<if test="roleAuth != null  and roleAuth != ''"> AND roleAuth=#{roleAuth}</if>
+		<if test="describle != null  and describle != ''"> AND describle=#{describle}</if>
+	</select>
+
+	<select id="selectByLimit" parameterType="com.mini.cms.admin.dao.entity.basic.RoleEty" resultType="com.mini.cms.admin.dao.entity.basic.RoleEty">
+		SELECT * from role
+		WHERE 1=1 
+		<if test="id != null "> AND id=#{id}</if>
+		<if test="roleName != null  and roleName != ''"> AND roleName=#{roleName}</if>
+		<if test="roleAuth != null  and roleAuth != ''"> AND roleAuth=#{roleAuth}</if>
+		<if test="describle != null  and describle != ''"> AND describle=#{describle}</if>
+		<if test="extLimitSort != null">order by ${extLimitSort} ${extLimitDir}</if>
+		<if test="extLimitLimit != null"> limit ${extLimitStart}, ${extLimitLimit}</if>
+	</select>
+</mapper>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper    PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"    "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.mini.cms.admin.dao.mapper.basic.RoleResourceDao">
+	<cache/>
+	<insert id="insert" parameterType="com.mini.cms.admin.dao.entity.basic.RoleResourceEty">
+		insert into roleresource(
+			id,roleId,nodeId)
+		values (
+			#{id},#{roleId},#{nodeId}
+		)
+	</insert>
+
+	<select id="selectByEntity" parameterType="com.mini.cms.admin.dao.entity.basic.RoleResourceEty" resultType="com.mini.cms.admin.dao.entity.basic.RoleResourceEty">
+		SELECT * from roleresource
+		WHERE 1=1 
+		<if test="id != null "> AND id=#{id}</if>
+		<if test="roleId != null "> AND roleId=#{roleId}</if>
+		<if test="nodeId != null "> AND nodeId=#{nodeId}</if>
+	</select>
+
+	<update id="updateById" parameterType="com.mini.cms.admin.dao.entity.basic.RoleResourceEty">
+		UPDATE roleresource SET
+		<if test="id != null">id=#{id},</if>
+		<if test="roleId != null">roleId=#{roleId},</if>
+		<if test="nodeId != null">nodeId=#{nodeId},</if>
+		 id=#{id}
+		WHERE
+		 id=#{id}
+	</update>
+
+	<select id="selectById" parameterType="int" resultType="com.mini.cms.admin.dao.entity.basic.RoleResourceEty">
+		select * from roleresource where id=#{id}
+	</select>
+
+	<delete id="deleteById" parameterType="int">
+		DELETE FROM roleresource WHERE id=#{id}
+	</delete>
+
+	<select id="selectLimitCount" parameterType="com.mini.cms.admin.dao.entity.basic.RoleResourceEty" resultType="java.lang.Integer">
+		SELECT count(1) from roleresource
+		WHERE 1=1 
+		<if test="id != null "> AND id=#{id}</if>
+		<if test="roleId != null "> AND roleId=#{roleId}</if>
+		<if test="nodeId != null "> AND nodeId=#{nodeId}</if>
+	</select>
+
+	<select id="selectByLimit" parameterType="com.mini.cms.admin.dao.entity.basic.RoleResourceEty" resultType="com.mini.cms.admin.dao.entity.basic.RoleResourceEty">
+		SELECT * from roleresource
+		WHERE 1=1 
+		<if test="id != null "> AND id=#{id}</if>
+		<if test="roleId != null "> AND roleId=#{roleId}</if>
+		<if test="nodeId != null "> AND nodeId=#{nodeId}</if>
+		<if test="extLimitSort != null">order by ${extLimitSort} ${extLimitDir}</if>
+		<if test="extLimitLimit != null"> limit ${extLimitStart}, ${extLimitLimit}</if>
+	</select>
+	
+	<select id="selectRoleResources" parameterType="com.mini.cms.admin.dao.entity.basic.RoleResourceEty" resultType="com.mini.cms.admin.dao.entity.basic.ResourcesEty">
+		SELECT r.id,r.nodeId,r.menuName,r.parantNodeID,r.icon,r.actionPath,r.menuOrder,r.isValiDate,r.description, rs.id as openIcon FROM resources r
+		left join roleresource rs on r.nodeId = rs.nodeId and roleId=#{roleId}
+		where r.parantNodeID = #{nodeId}
+		order by nodeId, menuOrder
+	</select>
+	
+	<delete id="deleteByIds" parameterType="java.util.HashMap">
+		DELETE FROM roleresource WHERE roleId=#{roleId} and nodeId in (${allNodes})
+	</delete>
+	
+</mapper>

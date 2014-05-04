@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="cache-control" content="no-store" />
+		<meta http-equiv="pragma" content="no-cache" />
+		<meta http-equiv="expires" content="0" />
+		
+		<link rel="stylesheet" type="text/css" href="main.css"/>
+		<link rel="stylesheet" type="text/css" href="../js/jqpagination/css/jqpagination.css"/>
+		
+		<script type="text/javascript" src="../js/jquery/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" src="../js/jquery/jquery.tmpl.min.js"></script>
+		<script type="text/javascript" src="../js/jqpagination/js/jquery.jqpagination.min.js"></script>
+		<script type="text/javascript" src="global.js"></script>
+		<script type="text/javascript" src="../js/param.js"></script>
+		
+		<link type="text/css" href="menu/menu.css" rel="stylesheet" />
+		
+		<style type="text/css">
+			.pagination {
+				float: right;
+			}
+			
+			#dataTable {
+				border: 0px solid #FF0000;
+				border-collapse: separate;
+			}
+			#dataTable tr{
+				height: 30px;
+				display: table-row;
+			}
+		</style>
+		
+		<script type="text/javascript">
+			var $j = jQuery.noConflict();
+			var pageSize = 20;
+			$j(function() {
+				createSide("9,1,7,8");
+				
+				var markup = [
+					'<tr>',
+						'<td style="width:10px;">．</td>',
+						'<td><a href="news_detail.html?id=${id}">${name}</a></td>',
+						'<td style="width:70px;">${createDate}</td>',
+					'</tr>',
+		       	];
+				
+				function loadDataTable(cId, start, limit) {
+					$j("#dataTable").html('');
+					$j.post('../front/cc/getContentItemList.sdo', {contentId:cId, 'extLimit.start': start, 'extLimit.limit': limit, 'extLimit.sort': 'itemOrder', 'extLimit.dir': 'DESC'}, function(data) {
+						$j.template("dataTableTemplate", markup.join(''));
+				  		$j.tmpl("dataTableTemplate", data.invdata).appendTo("#dataTable");
+				  		
+				  		
+				  		var totalPage = Math.floor(data.total / pageSize);
+				  		if(data.total % pageSize > 0) {
+				  			totalPage ++;
+				  		}
+				  		
+				  		$j("#newsHeader").html('当前位置-->' + data.otherInfo);
+				  			
+				  		$j('.pagination').jqPagination({
+				  			current_page: 1,
+							max_page: totalPage,
+							page_string: '第 {current_page} 页， 共{max_page} 页',
+						    paged: function(page) {
+						    	loadDataTable(paramObj.id, (page - 1) * pageSize, pageSize);
+						    }
+						});
+				  	}, 'json');
+				}
+				
+				loadDataTable(paramObj.id, 0, pageSize);
+			});
+		</script>
+	</head>
+	<body>
+		<div id="header">
+			<div id="header">
+				<div class="headerlogo">
+					<div id="webName">天空网</div>
+					<div id="menu">
+					    <ul class="menu">
+					    </ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="container">
+			<div id="side">正在加载...</div>
+			<div id=content>
+				<div id="newsHeader">当前位置-->新闻列表</div>
+				<div id="dataList">
+					<table class="left_dt" id="dataTable">
+					</table>
+				</div>
+				<div class="pagination">
+				    <a href="#" class="first" data-action="first">&laquo;</a>
+				    <a href="#" class="previous" data-action="previous">&lsaquo;</a>
+				    <input type="text" readonly="readonly" data-max-page="40" />
+				    <a href="#" class="next" data-action="next">&rsaquo;</a>
+				    <a href="#" class="last" data-action="last">&raquo;</a>
+				</div>
+			</div>
+		</div>
+		
+		<div id="pagefooter"></div>
+		
+	</body>
+</html>

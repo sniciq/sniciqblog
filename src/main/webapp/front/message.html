@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="cache-control" content="no-store" />
+		<meta http-equiv="pragma" content="no-cache" />
+		<meta http-equiv="expires" content="0" />
+		
+		<link rel="stylesheet" type="text/css" href="main.css"/>
+		<link rel="stylesheet" type="text/css" href="../js/jqpagination/css/jqpagination.css"/>
+		
+		<script type="text/javascript" src="../js/jquery/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" src="../js/jquery/jquery.form.js"></script>
+		
+		<script type="text/javascript" src="../js/jquery/jquery.tmpl.min.js"></script>
+		<script type="text/javascript" src="../js/jqpagination/js/jquery.jqpagination.min.js"></script>
+		<script type="text/javascript" src="global.js"></script>
+		<script type="text/javascript" src="../js/param.js"></script>
+		
+		<link type="text/css" href="menu/menu.css" rel="stylesheet" />
+		
+		<style type="text/css">
+			.pagination {
+				float: right;
+			}
+			
+			#dataTable {
+				border: 0px solid #FF0000;
+				border-collapse: separate;
+			}
+			#dataTable tr{
+				height: 30px;
+				display: table-row;
+			}
+			
+			.inputErr {
+				display: none;
+			}
+		</style>
+		
+		<script type="text/javascript">
+			var $j = jQuery.noConflict();
+			$j(function() {
+				createDefauleSide();
+				
+				$j("#msgForm input").blur(function() {
+					var allowBlank = $j(this).attr("allowBlank");
+					if(allowBlank == 'false') {
+						if($j(this).val() == '') {
+							$j(this).next().show();
+						}
+						else {
+							$j(this).next().hide();
+						}
+					}
+				});
+				
+				$j("#validateCodeImg").click(function() {
+					$j(this).attr("src", "../mini/cms/front/createVdlidate.sdo");
+				});
+				
+				$j("#submitBtn").click(function() {
+					var validated = true;
+					$j("#msgForm input").each(function(index) {
+						var allowBlank = $j(this).attr("allowBlank");
+						if(allowBlank == 'false') {
+							if($j(this).val() == '') {
+								alert($j(this).attr("name"))
+								validated = false;
+							}
+						}
+					});
+					
+					if(!validated) {
+						return;
+					}
+					
+					var options = {
+						url: '../front/cc/msg.sdo',
+						dataType:  'json',
+						success: function(data, status) {
+							if(data.result == 'success') {
+								alert('谢谢您的留言！我们会尽快给您回复！');
+								$j("#msgForm").get(0).reset();
+							}
+							else {
+								alert(data.info);
+							}
+						}
+					}
+					var af = $j('#msgForm').ajaxForm(options);
+					af.submit();
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div id="header">
+			<div id="header">
+				<div class="headerlogo">
+					<div id="webName">天空网</div>
+					<div id="menu">
+					    <ul class="menu">
+					    </ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="container">
+			<div id="side">正在加载...</div>
+			<div id="content" >
+				<form id="msgForm" action="" method="post">
+				<table>
+					<tr>
+						<td>您的称呼：<span style="color: #FF0000">*</span></td>
+						<td>
+							<input type="text" name="name" allowBlank="false"/><label class="inputErr" style="color: #FF0000">姓名是必填的</label>
+						</td>
+					</tr>
+					<tr>
+						<td>联系电话：<span style="color: #FF0000">*</span></td>
+						<td>
+							<input type="text" name="phone" allowBlank="false"/><label class="inputErr" style="color: #FF0000">电话是必填的</label>
+						</td>
+					</tr>
+					<tr>
+						<td>电子邮件：</td>
+						<td>
+							<input type="text" name="email"/>
+						</td>
+					</tr>
+					<tr>
+						<td>留言内容：</td>
+						<td>
+							<textarea rows="4" cols="50" name="message"></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td>验 证 码：<span style="color: #FF0000">*</span></td>
+						<td>
+							<input type="text" name="validateCode" style="vertical-align: middle;margin-top: 0px;width: 60px;" allowBlank="false"/>
+							<label class="inputErr" style="color: #FF0000">验 证 码是必填的</label>
+							<img id="validateCodeImg" alt="验证码" style="vertical-align: middle;margin-top: 0px;cursor: pointer;" src="../mini/cms/front/createVdlidate.sdo">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" align="center">
+							<input id="submitBtn" type="button" value="提交" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" value="重置"/>
+						</td>
+					</tr>
+				</table>
+				</form>
+			</div>
+		</div>
+		
+		<div id="pagefooter"></div>
+	</body>
+</html>

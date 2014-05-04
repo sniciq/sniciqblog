@@ -1,0 +1,30 @@
+<div class="container">
+	<ul class="list-group">
+		<li class="list-group-item" ng-repeat="item in data.invdata">
+		    <a href="#/detail/{{item.id}}">{{item.name}}</a><span class="badge">{{item.createDate}}</span>
+		</li>
+	</ul>
+
+	<ul class="pagination" >
+		<li><a href="#">&laquo;</a></li>
+		<li ng-repeat="page in pageData.pages">
+			<a href="#" ng-click="onClickPage(1)">{{page}}</a>
+		</li>
+		<li><a href="#">&raquo;</a></li>
+	</ul>
+	<br/>
+
+
+	<ul class="pagination">
+	  <li><a href="#">&laquo;</a></li>
+	  <li><a href="#">1</a></li>
+	  <li><a href="#">2</a></li>
+	  <li><a href="#">3</a></li>
+	  <li><a href="#">4</a></li>
+	  <li><a href="#">5</a></li>
+	  <li><a href="#">&raquo;</a></li>
+	</ul>
+</div>
+
+
+

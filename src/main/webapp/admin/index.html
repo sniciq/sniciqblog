@@ -1,0 +1,181 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Mini CMS</title>
+    <meta name="title" content="Mini CMS"/>
+    <meta name="application-name" content="Mini CMS" />
+	<link rel="Shortcut Icon" href="images/favicon.ico" />
+	<link rel="stylesheet" type="text/css" href="../ExtJS/resources/css/ext-all.css.gzipfile"/>
+	
+	<script type="text/javascript" src="../ExtJS/adapter/ext/ext-base.js.gzipfile"></script>
+	<script type="text/javascript" src="../ExtJS/ext-all.js.gzipfile"></script>
+	<script type="text/javascript" src="../ExtJS/src/locale/ext-lang-zh_CN.js"></script>
+    
+    <style type="text/css">
+		.text-user{
+			background:url('images/user.png') no-repeat!important;padding:2px 0 2px 18px;
+		}
+		.text-lock{
+			background:url('images/lock.gif') no-repeat!important;padding:2px 0 2px 18px;
+		}
+		.login {
+		    background-image: url(images/blogin.png ) !important;
+		}
+		.reset {
+		    background-image: url(images/login-reset.png ) !important;
+		}
+	</style>
+		
+    <script type="text/javascript">
+		Ext.onReady(function() {
+			Ext.form.Validate = Ext.extend(Ext.BoxComponent, {
+		        onRender : function(ct, position){  
+		            if(!this.el){   
+		                this.el=document.createElement('img');               
+		                this.el.src=this.src;
+		                this.el.style.cursor='hand';
+		                this.el.onclick= function(){
+		                  this.src=this.src+"?"+Math.random();
+		                }
+		                this.el.title = '看不清?点击换一个';
+		                if(this.forId){   
+		                    this.el.setAttribute('htmlFor', this.forId);   
+		                }
+		            }
+		            Ext.form.Label.superclass.onRender.call(this, ct, position);
+		        }
+		    });
+		    Ext.reg('validate', Ext.form.Validate); 
+		    
+			var loginForm = new Ext.form.FormPanel({
+				frame: false,
+				height: 140,
+				bodyStyle : 'padding-top:8px',
+				labelAlign: 'right',
+				labelWidth: 60,
+				labelPad : 0,
+		        border : false,
+				items: [
+					 { xtype: 'textfield', name: 'userName', cls : 'text-user', allowBlank: false, fieldLabel: '用户名', allowBlank : false, anchor : '95%'},
+					 { xtype: 'textfield',  name: 'password', inputType:'password', cls: 'text-lock',allowBlank: false, fieldLabel: '密&nbsp;&nbsp;&nbsp;码', allowBlank : false, anchor : '95%'}
+					 /*
+					 {
+						layout:"column",      //用列模式(一行两列布局)
+						defaults:{
+						  layout:"form",
+						  columnWidth:0.5
+						},
+						border: false,
+						items:[
+							{
+								border: false,
+								defaults:{anchor:"100%"},
+								items:[{xtype:"textfield",name: 'validateCode',fieldLabel:"验证码",border: false}]
+							},
+							{
+								border: false,
+								items:[{xtype:"validate",src:"../mini/cms/front/createVdlidate.sdo",border: false}]
+							}
+						]
+					}
+					 */
+				],
+				buttons: [
+					{
+						text: '登录',
+						id: 'loginBtn',
+						iconCls: 'login',
+						width: 70,
+						handler: doLogin
+					},
+					{
+						text: '重置',
+						iconCls: 'reset',
+						handler: function() {
+							loginForm.getForm().reset();
+						}
+					}
+				],
+				keys:[
+					{
+						key: [13],
+						fn: doLogin	
+					}
+				]
+			});
+			
+			function doLogin() {
+				if(!loginForm.getForm().isValid())
+					return;
+
+				Ext.getCmp('loginBtn').disable();
+				loginForm.form.doAction('submit', {
+					url: '../mini/cms/admin/basic/LoginController/login.sdo',
+					method: 'post',
+					waitTitle:'请等待',
+					waitMsg: '正在登录...',
+					params: '',
+					success: function(form, action) {
+						if(action.result.result == 'success') {
+							window.location.href = 'main.jsp';
+						}
+						else if(action.result.result == 'error') {
+							Ext.MessageBox.show({
+				        		title: '错误!',
+			        		    msg: action.result.info,
+			        		    buttons: Ext.Msg.OK,
+			        		    icon: Ext.MessageBox.ERROR,
+			        		    fn: function(){Ext.getCmp('loginBtn').enable();}
+				        	});
+						}
+						else {
+							Ext.MessageBox.show({
+				        		title: '错误!',
+			        		    msg: '用户名或者密码错误',
+			        		    buttons: Ext.Msg.OK,
+			        		    icon: Ext.MessageBox.ERROR,
+			        		    fn: function(){window.location.href = 'login.html';}
+				        	});
+						}
+					}
+				});
+			}
+			
+			win = new Ext.Window({
+				title:'用户登录',
+                applyTo:'center-div',
+                layout:'fit',
+                width: 350,
+				height: 200,
+				bodyStyle : 'background-color: white',
+                border : true,
+				closable : false,
+                resizable : true,
+                closeAction:'hide',
+                plain: true,
+                layout : {
+                    type : 'vbox',
+                    align : 'stretch'
+                },
+                items: [
+					{
+					    xtype : 'panel',
+					    border : false,
+					    bodyStyle : 'padding-left:30px',
+					    html : '<table border="0"><tr><td valign="top"></td><td><a style="font-weight: bold;font-size: 20;text-align: center;color: #3F3A39">Mini CMS</a></td></tr></table>',
+					    height : 30
+					},
+                    loginForm
+                ]
+			});
+			win.show();
+		});
+	</script>
+</head>
+	<body>
+		<div id="center-div" style=""></div>
+	</body>
+</html>
+</head>
+<body>
+</body>

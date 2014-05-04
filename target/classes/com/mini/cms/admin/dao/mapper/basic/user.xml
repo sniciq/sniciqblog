@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper    PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"    "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.mini.cms.admin.dao.mapper.basic.UserDao">
+	<cache/>
+
+	<insert id="insert" parameterType="com.mini.cms.admin.dao.entity.basic.UserEty">
+		insert into user(
+			id,userName,realName,sex,email,password,description,birthDay,insertDate)
+		values (
+			#{id},#{userName},#{realName},#{sex},#{email},#{password},#{description},#{birthDay},now()
+		)
+	</insert>
+
+	<select id="selectByEntity" parameterType="com.mini.cms.admin.dao.entity.basic.UserEty" resultType="com.mini.cms.admin.dao.entity.basic.UserEty">
+		SELECT * from user
+		WHERE 1=1 
+		<if test="id != null "> AND id=#{id}</if>
+		<if test="userName != null  and userName != ''"> AND userName=#{userName}</if>
+		<if test="realName != null  and realName != ''"> AND realName=#{realName}</if>
+		<if test="sex != null"> AND sex=#{sex}</if>
+		<if test="email != null"> AND email=#{email}</if>
+		<if test="password != null  and password != ''"> AND password=#{password}</if>
+		<if test="description != null  and description != ''"> AND description=#{description}</if>
+		<if test="insertDate != null "> AND insertDate=#{insertDate}</if>
+	</select>
+
+	<update id="updateById" parameterType="com.mini.cms.admin.dao.entity.basic.UserEty">
+		UPDATE user SET
+		<if test="id != null">id=#{id},</if>
+		<if test="userName != null">userName=#{userName},</if>
+		<if test="realName != null">realName=#{realName},</if>
+		<if test="sex != null">sex=#{sex},</if>
+		<if test="email != null">email=#{email},</if>
+		<if test="password != null">password=#{password},</if>
+		<if test="description != null">description=#{description},</if>
+		<if test="insertDate != null">insertDate=#{insertDate},</if>
+		<if test="birthDay != null">birthDay=#{birthDay},</if>
+		 id=#{id}
+		WHERE
+		 id=#{id}
+	</update>
+
+	<select id="selectById" parameterType="int" resultType="com.mini.cms.admin.dao.entity.basic.UserEty">
+		select * from user where id=#{id}
+	</select>
+
+	<delete id="deleteById" parameterType="int">
+		DELETE FROM user WHERE id=#{id}
+	</delete>
+
+	<select id="selectLimitCount" parameterType="com.mini.cms.admin.dao.entity.basic.UserEty" resultType="java.lang.Integer">
+		SELECT count(1) from user
+		WHERE 1=1 
+		<if test="id != null "> AND id=#{id}</if>
+		<if test="userName != null  and userName != ''"> AND userName=#{userName}</if>
+		<if test="realName != null  and realName != ''"> AND realName=#{realName}</if>
+		<if test="password != null  and password != ''"> AND password=#{password}</if>
+		<if test="sex != null">sex=#{sex},</if>
+		<if test="email != null">email=#{email},</if>
+		<if test="description != null  and description != ''"> AND description=#{description}</if>
+		<if test="insertDate != null "> AND insertDate=#{insertDate}</if>
+	</select>
+
+	<select id="selectByLimit" parameterType="com.mini.cms.admin.dao.entity.basic.UserEty" resultType="com.mini.cms.admin.dao.entity.basic.UserEty">
+		SELECT * from user
+		WHERE 1=1 
+		<if test="id != null "> AND id=#{id}</if>
+		<if test="userName != null  and userName != ''"> AND userName=#{userName}</if>
+		<if test="realName != null  and realName != ''"> AND realName=#{realName}</if>
+		<if test="password != null  and password != ''"> AND password=#{password}</if>
+		<if test="sex != null">sex=#{sex},</if>
+		<if test="email != null">email=#{email},</if>
+		<if test="description != null  and description != ''"> AND description=#{description}</if>
+		<if test="insertDate != null "> AND insertDate=#{insertDate}</if>
+		<if test="extLimitSort != null">order by ${extLimitSort} ${extLimitDir}</if>
+		<if test="extLimitLimit != null"> limit ${extLimitStart}, ${extLimitLimit}</if>
+	</select>
+</mapper>

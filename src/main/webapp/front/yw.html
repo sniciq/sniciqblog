@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="cache-control" content="no-store" />
+		<meta http-equiv="pragma" content="no-cache" />
+		<meta http-equiv="expires" content="0" />
+		
+		<link rel="stylesheet" type="text/css" href="main.css"/>
+		<link rel="stylesheet" type="text/css" href="../js/jqpagination/css/jqpagination.css"/>
+		
+		<script type="text/javascript" src="../js/jquery/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" src="../js/jquery/jquery.tmpl.min.js"></script>
+		<script type="text/javascript" src="../js/jqpagination/js/jquery.jqpagination.min.js"></script>
+		<script type="text/javascript" src="global.js"></script>
+		<script type="text/javascript" src="../js/param.js"></script>
+		
+		<link type="text/css" href="menu/menu.css" rel="stylesheet" />
+		
+		<style type="text/css">
+			.pagination {
+				float: right;
+			}
+			
+			#dataTable {
+				border: 0px solid #FF0000;
+				border-collapse: separate;
+			}
+			#dataTable tr{
+				height: 30px;
+				display: table-row;
+			}
+		</style>
+		
+		<script type="text/javascript">
+			var $j = jQuery.noConflict();
+			var pageSize = 20;
+			$j(function() {
+				createDefauleSide();
+			});
+		</script>
+	</head>
+	<body>
+		<div id="header">
+			<div id="header">
+				<div class="headerlogo">
+					<div id="webName">天空网</div>
+					<div id="menu">
+					    <ul class="menu">
+					        <li><a href="index.html"><span>首页</span></a></li>
+					        <li><a href="newslist.html?id=1"><span>新闻动态</span></a></li>
+					        <li><a href="yw.html?id=5"><span>业务领域</span></a></li>
+					        <li><a href="newslist.html?id=2"><span>经典案例</span></a></li>
+					        <li><a href="newslist.html?id=3"><span>律师风采</span></a></li>
+					        <li><a href="newslist.html?id=4"><span>法律咨询</span></a></li>
+					        <li><a href="message.html?id=-1"><span>在线留言</span></a></li>
+					        <li class="last"><a href="contact.html?id=6"><span>联系方式</span></a></li>
+					    </ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="container">
+			<div id="side">正在加载...</div>
+			<div id=content>
+				<p>
+					<strong style="color: rgb(0, 0, 0); font-family: 宋体; line-height: 24px; text-align: left; ">
+						<font size="2">民事诉讼　刑事诉讼　行政诉讼　国家赔偿　商务代理<br />常年或专项法律顾问</font>
+					</strong>
+				</p>
+			</div>
+		</div>
+		
+		<div id="pagefooter">
+			<div style="text-align: center;">
+				天空网<br/>电话：0871-5665619 5665929 传真：0871-5665929<br/>地址： 白云路525号北京路花苑1幢603 滇ICP备10201280号<br/>
+			</div>
+		</div>
+		
+	</body>
+</html>

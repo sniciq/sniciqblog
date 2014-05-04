@@ -1,0 +1,32 @@
+.add {
+    background-image: url(../images/add.gif ) !important;
+}
+
+.edit {
+    background-image: url(../images/edit.gif ) !important;
+}
+
+.del {
+    background-image: url(../images/del.gif ) !important;
+}
+
+.find {
+    background-image: url(../images/find.gif ) !important;
+}
+
+.up {
+	background-image: url(../images/up.gif) !important;
+}
+
+.export {
+	background-image: url(../images/export.gif ) !important;
+}
+
+.expand {
+	background-image: url(../images/expand.png ) !important;
+}
+
+.typeBtn {
+	background-color: #FF0000;
+	background-image: url(../images/export.gif ) !important;
+}

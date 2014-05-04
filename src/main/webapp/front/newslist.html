@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="no-cache">
+	<meta http-equiv="Expires" content="-1">
+	<meta http-equiv="Cache-Control" content="no-cache">
+	<title>无我仙人的个人网站</title>
+    <link rel="stylesheet" type="text/css" href="../bootstrap/2.0/css/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="../bootstrap/2.0/css/bootstrap-responsive.min.css"/>
+	
+	<link rel="stylesheet" type="text/css" href="main.css"/>
+	
+    <style type="text/css">
+		body {
+		  padding-top: 60px;
+		  padding-bottom: 40px;
+		}
+		a {
+			color: #222;
+		}
+      	.pagination {
+			float: right;
+			height: 30px;
+		}
+		
+		#dataTable {
+			border: 0px solid #FF0000;
+			border-collapse: separate;
+		}
+		#dataTable tr{
+			height: 30px;
+			display: table-row;
+		}
+    </style>
+	
+	<script type="text/javascript" src="../js/jquery/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="../js/jquery/jquery.tmpl.min.js"></script>
+	<script type="text/javascript" src="global.js"></script>
+	<script type="text/javascript" src="../js/param.js"></script>
+	<script type="text/javascript" src="../bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../bootstrap/paginator/bootstrap-paginator.js"></script>
+	
+	<script type="text/javascript">
+		var $j = jQuery.noConflict();
+		var pageSize = 20;
+		var current_page = 1;
+		var totalPage = 1;
+		$j(function() {
+			createDefauleSide();
+			
+			var markup = [
+				'<tr>',
+					'<td style="width:10px;">．</td>',
+					'<td><a href="news_detail.html?id=${id}">${name}</a></td>',
+					'<td style="width:70px;">${createDate}</td>',
+				'</tr>',
+	       	];
+			
+			/*
+			var pagerMarkup = [
+				'<ul>',
+					'<li><a onclick="page(1)"  style="cursor: pointer;">首页</a></li>',
+					'<li><a onclick="page(${current_page} - 1)" style="cursor: pointer;">前一页</a></li>',
+					'{{each pagelist}}',
+						'<li ', 
+						'{{if $value==current_page }}',
+							'class="active"',
+						'{{/if}}',
+						'><a onclick="page(${$value})" style="cursor: pointer;">${$value}</a></li>',
+					'{{/each}}',
+					'<li><a onclick="page(${current_page} + 1)"  style="cursor: pointer;">后一页</a></li>',
+					'<li><a onclick="page(${totalPage})"  style="cursor: pointer;">尾页</a></li>',
+				'</ul>'
+			];
+			
+			window.page = function (p) {
+				if(p < 1) p = 1;
+				if(p > totalPage) p = totalPage;
+				current_page = p;
+				loadDataTable(paramObj.id, (p - 1) * pageSize, pageSize);
+				return false;
+			}
+			*/
+			
+			function loadDataTable(cId, start, limit) {
+				$j("#dataTable").html('');
+				$j.post('../front/cc/getContentItemList.sdo', {contentId:cId, 'extLimit.start': start, 'extLimit.limit': limit, 'extLimit.sort': 'itemOrder', 'extLimit.dir': 'DESC'}, function(data) {
+					$j.template("dataTableTemplate", markup.join(''));
+			  		$j.tmpl("dataTableTemplate", data.invdata).appendTo("#dataTable");
+			  		
+			  		totalPage = Math.floor(data.total / pageSize);
+			  		if(data.total % pageSize > 0) {
+			  			totalPage ++;
+			  		}
+			  		
+			  		$j("#pagination_new").bootstrapPaginator({
+			  			currentPage: current_page,
+			            totalPages: totalPage,
+			            size:"normal",
+			            //useBootstrapTooltip:true,
+			            alignment:"left",
+			            numberOfPages:10,
+			            itemContainerClass: function (type, page, current) {
+			                return (page === current) ? "active" : "pointer-cursor";
+			            },
+			            onPageClicked: function(e,originalEvent,type,page){
+			            	current_page = page;
+			            	loadDataTable(paramObj.id, (page-1)*pageSize, pageSize);
+			            }
+			  		});
+			  		
+			  		/*
+			  		$j("#newsHeader").html('当前位置-->' + data.otherInfo);
+			  		$j("#pagination").html('');
+			  		
+			  		var pagelist = [];
+			  		var left = 3;
+			  		var right = 3;
+			  		if(current_page - left > 0) {
+			  			for(var i = current_page - left; i <= current_page; i++) {
+			  				pagelist.push(i);
+			  			}
+			  		}
+			  		else {
+			  			for(var i = 1; i <= current_page; i++) {
+			  				pagelist.push(i);
+			  			}
+			  			right += (left - current_page);
+			  		}
+			  		for(var i=current_page+1; i<=totalPage;i++) {
+			  			if(i>current_page+1+right) break;
+			  			pagelist.push(i);
+			  		}
+			  		
+			  		var pageData = {totalPage:totalPage, current_page:current_page,pagelist:pagelist};
+			  		$j.template("paginationTemplate", pagerMarkup.join(''));
+			  		$j.tmpl("paginationTemplate", pageData).appendTo("#pagination");
+			  		*/
+			  	}, 'json');
+			}
+			
+			loadDataTable(paramObj.id, 0, pageSize);
+		});
+	</script>
+  </head>
+
+  <body>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">无我仙人的个人网站</a>
+          <div class="nav-collapse">
+            <ul class="nav" id="menu"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="span4">
+          <div id="side">正在加载...</div>
+        </div>
+        
+		<div class="span8">
+			<div id="newsHeader">当前位置-->新闻列表</div>
+			<div id="dataList">
+				<table class="table" id="dataTable">
+				</table>
+			</div>
+			<!-- <div id="pagination" class="pagination"></div> -->
+			<div id="pagination_new"></div>
+		</div>
+        
+      </div>
+      <hr>
+
+      <footer>
+        <div id="pagefooter"></div>
+      </footer>
+
+    </div>
+  </body>
+</html>

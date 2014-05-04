@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="no-cache">
+	<meta http-equiv="Expires" content="-1">
+	<meta http-equiv="Cache-Control" content="no-cache">
+	<title>无我仙人的个人网站</title>
+    <link rel="stylesheet" type="text/css" href="../bootstrap/2.0/css/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="../bootstrap/2.0/css/bootstrap-responsive.min.css"/>
+	
+	<link rel="stylesheet" type="text/css" href="main.css"/>
+	
+    <style type="text/css">
+		body {
+		  padding-top: 60px;
+		  padding-bottom: 40px;
+		}
+		a {
+			color: #222;
+		}
+      	.pagination {
+			float: right;
+			height: 30px;
+		}
+		
+		#dataTable {
+			border: 0px solid #FF0000;
+			border-collapse: separate;
+		}
+		#dataTable tr{
+			height: 30px;
+			display: table-row;
+		}
+    </style>
+	
+	<script type="text/javascript" src="../js/jquery/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="../js/jquery/jquery.tmpl.min.js"></script>
+	<script type="text/javascript" src="global.js"></script>
+	<script type="text/javascript" src="../js/param.js"></script>
+	
+	<script type="text/javascript">
+		var $j = jQuery.noConflict();
+		$j(function() {
+			function loadContent(id) {
+				$j("#newsDeatil").html('正在加载...');
+				$j.post('../front/cc/dtail.sdo', {itemId: id}, function(data) {
+					$j("#newsDeatil").html(data);
+				}, 'html');
+			}
+			loadContent(paramObj.id);
+			createDefauleSide();
+		});
+	</script>
+  </head>
+
+  <body>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">无我仙人的个人网站</a>
+          <div class="nav-collapse">
+          	<ul class="nav" id="menu"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="span4">
+          <div id="side">正在加载...</div>
+        </div>
+        
+        <div class="span8">
+			<div id="newsHeader">当前位置-->正文</div>
+			<div id="newsDeatil">
+				正在加载...
+			</div>
+       </div>
+      </div>
+      <hr>
+      <footer>
+        <div id="pagefooter"></div>
+      </footer>
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,82 @@
+<!doctype html>
+<html ng-app="myApp">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="no-cache">
+		<meta http-equiv="Expires" content="-1">
+		<meta http-equiv="Cache-Control" content="no-cache">
+		<title>无我仙人</title>
+		<link rel="stylesheet" type="text/css" href="../bootstrap/3.0.3/css/bootstrap.min.css"/>
+		
+		
+		<script src="../angular/1.2.16/angular.js"></script>
+		<script src="../angular/1.2.16/angular-route.js"></script>
+		
+		<script src="app.js"></script>
+		<script src="services.js"></script>
+		<script src="controllers.js"></script>
+		
+		<style type="text/css">
+			body {
+			  padding-top: 60px;
+			  padding-bottom: 40px;
+			}
+			a {
+				color: #222;
+			}
+			.container_left {
+			}
+			.container_center {
+			}
+			
+			#side {
+				background-color: #fff;
+				min-height: 500px;
+				margin: 3px 8px 0 0px;
+			}
+			
+			.side_header {
+				background: #EEE none;
+				border-color: #EEE;
+				padding: 5px 10px;
+				height: 25px;
+			}
+			.side_header .caption {
+				float: left;
+				font-size: 14px;
+				font-weight:bold;
+				padding: 0;
+				margin: 0;
+			}
+			.side_header .extend {
+				float: right;
+				padding: 0;
+				margin: 0;
+			}
+		</style>
+	</head>
+	<body >
+		<div class="navbar navbar-inverse navbar-fixed-top" role="navigation" ng-controller="MenuListController">
+			<div class="container">
+		        <div class="navbar-header">
+		        	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		            <span class="sr-only">Toggle navigation</span>
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+		          </button>
+		          <a class="navbar-brand active" href="#" ng-click="onClickSysName()">无我仙人</a>
+		        </div>
+		        <div class="collapse navbar-collapse">
+		          <ul class="nav navbar-nav">
+		            <li ng-repeat="menu in menuList" ng-class="navClass({{menu.id}})">
+		      			<a href="javascript: void(0)" ng-click="onClickMenu(menu)"><span>{{menu.name}}</span></a>
+		      		</li>
+		          </ul>
+		        </div>
+        	</div>
+		</div>
+		<div ng-view></div>
+	</body>
+</html>

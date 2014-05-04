@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" type="text/css" href="main.css"/>
+		<script type="text/javascript" src="../js/jquery/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" src="../js/jquery/jquery.tmpl.min.js"></script>
+		<script type="text/javascript" src="global.js"></script>
+		<script type="text/javascript" src="../js/param.js"></script>
+		
+		<link type="text/css" href="menu/menu.css" rel="stylesheet" />
+		
+		<script type="text/javascript">
+			var $j = jQuery.noConflict();
+			$j(function() {
+				function loadContent(id) {
+					$j("#newsDeatil").html('正在加载...');
+					$j.post('../front/cc/dtail.sdo', {itemId: id}, function(data) {
+						$j("#newsDeatil").html(data);
+					}, 'html');
+				}
+				loadContent(paramObj.id);
+				createSide("9,1,7,8");
+			});
+		</script>
+	</head>
+	<body>
+		<div id="header">
+			<div class="headerlogo">
+				<div id="webName">天空网</div>
+				<div id="menu">
+				    <ul class="menu">
+				    </ul>
+				</div>
+			</div>
+		</div>
+		<div id="container">
+			<div id="side">正在加载...</div>
+			<div id="content">
+				<div id="newsHeader">当前位置-->正文</div>
+				<div id="newsDeatil">
+					正在加载...
+				</div>
+			</div>
+		</div>
+		
+		<div id="pagefooter"></div>
+		
+	</body>
+</html>

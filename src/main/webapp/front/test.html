@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="no-cache">
+	<meta http-equiv="Expires" content="-1">
+	<meta http-equiv="Cache-Control" content="no-cache">
+
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+    </style>
+    
+    <link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap-responsive.min.css"/>
+	
+	<link rel="stylesheet" type="text/css" href="main.css"/>
+	<script type="text/javascript" src="../js/jquery/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="../js/jquery/jquery.tmpl.min.js"></script>
+	<script type="text/javascript" src="../js/jqpagination/js/jquery.jqpagination.min.js"></script>
+	<script type="text/javascript" src="global.js"></script>
+	<script type="text/javascript" src="../js/param.js"></script>
+	
+	<link type="text/css" href="menu/menu.css" rel="stylesheet" />
+
+	<script type="text/javascript">
+		var $j = jQuery.noConflict();
+		$j(function() {
+			createSide("9,1,7,8");
+			
+			$j(".menu>li").removeClass("active");
+			$j($j(".menu>li")[0]).addClass("active");
+		});
+	</script>
+  </head>
+
+  <body>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">无我仙人的个人网站</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="active"><a href="#">首页</a></li>
+              <li><a href="#about">关于</a></li>
+              <li><a href="#contact">联系</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="hero-unit">
+        <h2>你好, 欢迎来到无我仙人的网站！</h2>
+        <p>老子说过：“无为，则无死地；无死地，则长生！”</p>
+        <p><a class="btn btn-primary btn-large">了解更多 &raquo;</a></p>
+      </div>
+
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="span4">
+          <div id="side">正在加载...</div>
+        </div>
+        
+        <div class="span8">
+          <h2>老子很伟大</h2>
+           <p>
+		     千里之行,始于足下。
+信言不美,美言不信。善者不辩,辩者不善。
+慎终如始，则无败事。
+道、可道，非常道。名可名，非常名。无名，天地之始；有名万物之母；故恒无欲，以观其妙；恒有欲，以观其徼。此两者，同出而异名，同谓之玄。玄之又玄，众妙之门。
+上善若水。水善利万物而不争，处众人之所恶，故几于道。居善地，心善渊，与善仁，言善信，政善治，事善能，动善时。夫唯不争，故无尤。
+	   		</p>
+          <p><a class="btn" href="#">了解更多 &raquo;</a></p>
+       </div>
+        
+      </div>
+
+      <hr>
+
+      <footer>
+        <div id="pagefooter"></div>
+      </footer>
+
+    </div> <!-- /container -->
+  </body>
+</html>

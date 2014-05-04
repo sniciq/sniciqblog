@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper    PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"    "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.mini.cms.admin.dao.mapper.category.ContentItemDao">
+
+	<cache/>
+	
+	<insert id="insert" parameterType="com.mini.cms.admin.dao.entity.category.ContentItemEty">
+		insert into contentitem(
+			id,name,contentId,itemType,itemOrder,remark,createDate)
+		values (
+			#{id},#{name},#{contentId},#{itemType},#{itemOrder},#{remark},#{createDate}
+		)
+		<selectKey keyProperty="id" resultType="int" order="AFTER">
+			SELECT @@IDENTITY AS id
+		</selectKey>
+	</insert>
+
+	<select id="selectByEntity" parameterType="com.mini.cms.admin.dao.entity.category.ContentItemEty" resultType="com.mini.cms.admin.dao.entity.category.ContentItemEty">
+		SELECT * from contentitem
+		WHERE 1=1 
+		<if test="id != null "> AND id=#{id}</if>
+		<if test="name != null  and name != ''"> AND name=#{name}</if>
+		<if test="contentId != null "> AND contentId=#{contentId}</if>
+		<if test="itemType != null  and itemType != ''"> AND itemType=#{itemType}</if>
+		<if test="itemOrder != null "> AND itemOrder=#{itemOrder}</if>
+		<if test="remark != null  and remark != ''"> AND remark=#{remark}</if>
+		<if test="createDate != null  and createDate != ''"> AND createDate=#{createDate}</if>
+	</select>
+
+	<update id="updateById" parameterType="com.mini.cms.admin.dao.entity.category.ContentItemEty">
+		UPDATE contentitem SET
+		<if test="id != null">id=#{id},</if>
+		<if test="name != null">name=#{name},</if>
+		<if test="contentId != null">contentId=#{contentId},</if>
+		<if test="itemType != null">itemType=#{itemType},</if>
+		<if test="itemOrder != null">itemOrder=#{itemOrder},</if>
+		<if test="remark != null">remark=#{remark},</if>
+		<if test="createDate != null">createDate=#{createDate},</if>
+		 id=#{id}
+		WHERE
+		 id=#{id}
+	</update>
+
+	<select id="selectById" parameterType="int" resultType="com.mini.cms.admin.dao.entity.category.ContentItemEty">
+		select * from contentitem where id=#{id}
+	</select>
+
+	<delete id="deleteById" parameterType="int">
+		DELETE FROM contentitem WHERE id=#{id}
+	</delete>
+
+	<select id="selectLimitCount" parameterType="com.mini.cms.admin.dao.entity.category.ContentItemEty" resultType="java.lang.Integer">
+		SELECT count(1) from contentitem
+		WHERE 1=1 
+		<if test="id != null "> AND id=#{id}</if>
+		<if test="name != null  and name != ''"> AND name=#{name}</if>
+		<if test="contentId != null "> AND contentId=#{contentId}</if>
+		<if test="itemType != null  and itemType != ''"> AND itemType=#{itemType}</if>
+		<if test="itemOrder != null "> AND itemOrder=#{itemOrder}</if>
+		<if test="remark != null  and remark != ''"> AND remark=#{remark}</if>
+	</select>
+
+	<select id="selectByLimit" parameterType="com.mini.cms.admin.dao.entity.category.ContentItemEty" resultType="com.mini.cms.admin.dao.entity.category.ContentItemEty">
+		SELECT * from contentitem
+		WHERE 1=1 
+		<if test="id != null "> AND id=#{id}</if>
+		<if test="name != null  and name != ''"> AND name=#{name}</if>
+		<if test="contentId != null "> AND contentId=#{contentId}</if>
+		<if test="itemType != null  and itemType != ''"> AND itemType=#{itemType}</if>
+		<if test="itemOrder != null "> AND itemOrder=#{itemOrder}</if>
+		<if test="remark != null  and remark != ''"> AND remark=#{remark}</if>
+		<if test="extLimitSort == null">order by createDate desc</if>
+		<if test="extLimitSort != null">order by ${extLimitSort} ${extLimitDir}</if>
+		<if test="extLimitLimit != null"> limit ${extLimitStart}, ${extLimitLimit}</if>
+	</select>
+	
+	<select id="selectDataLimitCount" parameterType="com.mini.cms.admin.dao.entity.category.ContentItemEty" resultType="java.lang.Integer">
+		SELECT count(1) from contentitem
+		WHERE 1=1 
+		<if test="id != null "> AND id=#{id}</if>
+		<if test="name != null  and name != ''"> AND name=#{name}</if>
+		<if test="contentId != null "> AND contentId=#{contentId}</if>
+		<if test="itemType != null  and itemType != ''"> AND itemType=#{itemType}</if>
+		<if test="itemOrder != null "> AND itemOrder=#{itemOrder}</if>
+		<if test="remark != null  and remark != ''"> AND remark=#{remark}</if>
+	</select>
+
+	<select id="selectDataByLimit" parameterType="com.mini.cms.admin.dao.entity.category.ContentItemEty" resultType="com.mini.cms.admin.controller.category.ContentItemData">
+		SELECT i.*,c.name as contentName from contentitem i 
+		left join content c on i.contentId=c.id 
+		WHERE 1=1 
+		<if test="id != null "> AND id=#{id}</if>
+		<if test="name != null  and name != ''"> AND name=#{name}</if>
+		<if test="contentId != null "> AND contentId=#{contentId}</if>
+		<if test="itemType != null  and itemType != ''"> AND itemType=#{itemType}</if>
+		<if test="itemOrder != null "> AND itemOrder=#{itemOrder}</if>
+		<if test="remark != null  and remark != ''"> AND remark=#{remark}</if>
+		<if test="extLimitSort != null">order by ${extLimitSort} ${extLimitDir}</if>
+		<if test="extLimitLimit != null"> limit ${extLimitStart}, ${extLimitLimit}</if>
+	</select>
+</mapper>

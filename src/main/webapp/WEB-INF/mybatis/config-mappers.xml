@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE configuration   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<mappers>
+		<mapper resource="com/mini/cms/admin/dao/mapper/basic/user.xml"/>
+		<mapper resource="com/mini/cms/admin/dao/mapper/basic/resources.xml"/>
+		<mapper resource="com/mini/cms/admin/dao/mapper/basic/role.xml"/>
+		<mapper resource="com/mini/cms/admin/dao/mapper/basic/userrole.xml"/>
+		<mapper resource="com/mini/cms/admin/dao/mapper/basic/roleresource.xml"/>
+		
+		<mapper resource="com/mini/cms/admin/dao/mapper/category/category.xml"/>
+		<mapper resource="com/mini/cms/admin/dao/mapper/category/contentgroup.xml"/>
+		<mapper resource="com/mini/cms/admin/dao/mapper/category/content.xml"/>
+		<mapper resource="com/mini/cms/admin/dao/mapper/category/contentitem.xml"/>
+		
+		<mapper resource="com/mini/cms/admin/dao/mapper/content/contentdetail.xml"/>
+		
+		<mapper resource="com/mini/cms/admin/dao/mapper/msg/message.xml"/>
+	</mappers>
+</configuration>
